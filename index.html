@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div>
+		<img id="dice1" src="./dice/die1.png" alt="1 image">
+		<img id="dice2" src="./dice/die1.png" alt="2 image">
+		<img id="dice3" src="./dice/die1.png" alt="3 image">
+		<img id="dice4" src="./dice/die1.png" alt="4 image">
+		<img id="dice5" src="./dice/die1.png" alt="5 image">
+		<img id="dice6" src="./dice/die1.png" alt="6 image">
+		<br>
+		<img id="dice7" src="./dice/die1.png" alt="7 image">
+		<img id="dice8" src="./dice/die1.png" alt="8 image">
+		<img id="dice9" src="./dice/die1.png" alt="9 image">
+		<img id="dice10" src="./dice/die1.png" alt="10 image">
+		<img id="dice11" src="./dice/die1.png" alt="11 image">
+		<img id="dice12" src="./dice/die1.png" alt="12 image">
+	</div>
+	<button id="btn">Roll Dice</button>
+	<table id="result-table" cellpadding="10" border="1">
+	</table>
+	<script>
+		var face1 = 0, face2 = 0, face3 = 0, face4 = 0, face5 = 0, face6 = 0;
+		var total = 0;
+		let rollBtn = document.getElementById("btn");
+		rollBtn.addEventListener("click", rollDices);
+		//
+		let table = document.getElementById("result-table");
+
+		function updateTableData() {
+			table.innerHTML = "<thead><th>Face</th><th>Frequency</th><th>Percent</th></thead>"+
+			"<tbody>"+
+			"<tr><td>1</td><td>"+face1+"</td><td>"+calcutatePercentage(face1)+"%</td></tr>"+
+			"<tr><td>2</td><td>"+face2+"</td><td>"+calcutatePercentage(face2)+"%</td></tr>"+
+			"<tr><td>3</td><td>"+face3+"</td><td>"+calcutatePercentage(face3)+"%</td></tr>"+
+			"<tr><td>4</td><td>"+face4+"</td><td>"+calcutatePercentage(face4)+"%</td></tr>"+
+			"<tr><td>5</td><td>"+face5+"</td><td>"+calcutatePercentage(face5)+"%</td></tr>"+
+			"<tr><td>6</td><td>"+face6+"</td><td>"+calcutatePercentage(face6)+"%</td></tr>"+
+			"</tbody>"
+		}
+
+		function calcutatePercentage(count) {
+			return Math.floor((count/total)*100)
+		}
+
+		function setImage(id, face) {
+			var image = document.getElementById("dice" + id);
+			image.setAttribute("src", "./dice/die" + face + ".png")
+		}
+
+		function rollDices() {
+			for (var i = 1; i <= 12; i++) {
+				face = Math.floor(1 + Math.random() * 6);
+				setImage(i, face);
+				counter(face);
+				total += 1;
+			}
+			updateTableData();
+		}
+		//
+		function counter(face) {
+			switch (face) {
+				case 1:
+					face1 += 1;
+					break;
+				case 2:
+					face2 += 1;
+					break;
+				case 3:
+					face3 += 1;
+					break;
+				case 4:
+					face4 += 1;
+					break;
+				case 5:
+					face5 += 1;
+					break;
+				case 6:
+					face6 += 1;
+					break;
+			}
+		}
+	</script>
+</body>
+
+</html>
